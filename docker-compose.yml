@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  my-running-app:
+    container_name: my-running-app
+    restart: always
+    image: .
+    privileged: true
+    sysctls:
+      net.core.somaxconn: '511'   
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - $HOME/.docker/machine/machines:/machines
+    - $PWD/public-html:/usr/local/apache2/htdocs
+    ports:
+    - "8080:80"
+    environment:    
+    - TZ=Asia/Taipei
+ 
